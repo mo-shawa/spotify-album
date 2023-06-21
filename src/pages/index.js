@@ -9,10 +9,15 @@ export default function Home() {
 	console.log(session.data)
 	return (
 		<main>
-			{session.status === 'authenticated' && (
+			{session.status === 'authenticated' ? (
 				<>
 					<h1>Hi, !</h1>
 					<button onClick={() => signOut()}>Sign out</button>
+				</>
+			) : (
+				<>
+					<h1>Hi, !</h1>
+					<button onClick={() => signIn()}>Sign in</button>
 				</>
 			)}
 		</main>
