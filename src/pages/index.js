@@ -27,15 +27,15 @@ export default function Home() {
 		}
 	}, [status])
 	return (
-		<main>
+		<main className="h-screen w-full">
 			{currentlyPlaying ? (
 				<>
-					<h1>Currently Playing</h1>
 					<Image
 						src={currentlyPlaying.item.album.images[0].url}
 						alt={currentlyPlaying.item.album.name}
 						width={currentlyPlaying.item.album.images[0].width}
 						height={currentlyPlaying.item.album.images[0].height}
+						className="w-full h-full object-cover object-center"
 					/>
 				</>
 			) : (
