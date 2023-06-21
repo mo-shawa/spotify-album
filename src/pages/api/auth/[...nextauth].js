@@ -3,6 +3,9 @@ import SpotifyProvider from 'next-auth/providers/spotify'
 
 export default NextAuth({
 	// Configure one or more authentication providers
+	session: {
+		strategy: 'jwt',
+	},
 	providers: [
 		SpotifyProvider({
 			authorization: {
@@ -26,13 +29,19 @@ export default NextAuth({
 	],
 	debug: false,
 	callbacks: {
-		async session({ session, token, user }) {
-			// Send properties to the client, like an access_token and user id from a provider.
-			console.log({ token, user, session })
+		async session({ session, token }) {
+			session.user.id = token.id
 			session.accessToken = token.accessToken
-			session.user.id = token.sub
-
 			return session
+		},
+		async jwt({ token, user, account }) {
+			if (user) {
+				token.id = user.id
+			}
+			if (account) {
+				token.accessToken = account.access_token
+			}
+			return token
 		},
 	},
 })
