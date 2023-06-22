@@ -6,6 +6,7 @@ export default NextAuth({
 	session: {
 		strategy: 'jwt',
 	},
+
 	providers: [
 		SpotifyProvider({
 			authorization: {
@@ -27,7 +28,7 @@ export default NextAuth({
 
 		// ...add more providers here
 	],
-	debug: false,
+	debug: true,
 	callbacks: {
 		async session({ session, token }) {
 			session.user.id = token.id
